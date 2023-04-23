@@ -366,3 +366,7 @@ nbactions.xml
 ### Sass ###
 .sass-cache/
 *.css.map
+
+
+#request
+requestExamples/
