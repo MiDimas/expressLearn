@@ -12,8 +12,54 @@ class PostController {
         }
     }
     async getAll (req, res) {
-        const posts = await Post.find();
-        res.json(posts);
+        try {
+            const posts = await Post.find();
+            res.json(posts);
+        }
+        catch (e) {
+            res.status(500).json(e);
+        }
+
+    }
+    async getOne(req, res) {
+        try {
+            const {id} = req.params;
+            if (!id){
+                return res.status(400).json({message: "Id не найден"});
+            }
+            const post = await Post.findById(id);
+            return res.json(post);
+        }
+        catch (e) {
+            res.status(500).json(e);
+        }
+    }
+
+    async update(req, res) {
+        try {
+            const post = req.body;
+            if (!post._id){
+                return  res.status(400).json({message: "Укажите Id поста для обновления"});
+            }
+            const updatedPost = await Post.findByIdAndUpdate(post._id, post, {new: true});
+            return res.json(updatedPost);
+        }
+        catch (e) {
+            res.status(500).json(e);
+        }
+    }
+    async delete (req, res) {
+        try {
+            const {id} = req.params;
+            if (!id){
+                return res.status(400).json({message: "Id не указан"})
+            }
+            const post = await Post.findByIdAndDelete(id);
+            return res.json(post);
+        }
+        catch (e) {
+            res.statusCode(500).json(e)
+        }
     }
 }
 
