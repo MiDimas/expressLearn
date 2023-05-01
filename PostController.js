@@ -4,11 +4,11 @@ import PostService from "./PostService.js";
 class PostController {
     async create (req, res) {
         try {
-            const post = await PostService.create(req.body);
+            const post = await PostService.create(req.body, req.files.picture);
             res.json(post);
         }
         catch (e) {
-            res.status(500).json(e);
+            res.status(500).json(e.message);
         }
     }
     async getAll (req, res) {
@@ -17,7 +17,7 @@ class PostController {
             res.json(posts);
         }
         catch (e) {
-            res.status(500).json(e);
+            res.status(500).json(e.message);
         }
 
     }
@@ -27,7 +27,7 @@ class PostController {
             return res.json(post);
         }
         catch (e) {
-            res.status(500).json(e);
+            res.status(500).json(e.message);
         }
     }
 
@@ -37,7 +37,7 @@ class PostController {
             return res.json(updatedPost);
         }
         catch (e) {
-            res.status(500).json(e);
+            res.status(500).json(e.message);
         }
     }
     async delete (req, res) {
@@ -46,7 +46,7 @@ class PostController {
             return res.json(post);
         }
         catch (e) {
-            res.statusCode(500).json(e)
+            res.statusCode(500).json(e.message)
         }
     }
 }

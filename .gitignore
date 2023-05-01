@@ -369,4 +369,4 @@ nbactions.xml
 
 
 #request
-requestExamples/
+requestExamples/requester.js
